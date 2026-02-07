@@ -23,7 +23,7 @@ export const auth = betterAuth({
     provider: "postgresql", // or "mysql", "postgresql", ...etc
   }),
 
-  trustedOrigins: ["http://localhost:3000", ...trustedOrigins],
+  trustedOrigins: ["https://next-js-frontend-ass-4.vercel.app","http://localhost:3000", ...trustedOrigins],
   user: {
     additionalFields: {
       role: {

@@ -16,7 +16,7 @@ const app = express();
 app.set("trust proxy", 1);
 
 // Allow multiple origins via TRUSTED_ORIGINS (comma-separated) or fallback to APP_URL
-const corsOrigins = (process.env.TRUSTED_ORIGINS || process.env.APP_URL || "http://localhost:3000"||"https://medicareshope.vercel.app")
+const corsOrigins = (process.env.TRUSTED_ORIGINS || process.env.APP_URL || "http://localhost:3000"||"https://medicareshope.vercel.app"||"https://next-js-frontend-ass-4.vercel.app")
   .split(",")
   .map((s) => s.trim())
   .filter(Boolean);
