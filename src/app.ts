@@ -20,7 +20,7 @@ const corsOrigins = (process.env.TRUSTED_ORIGINS || process.env.APP_URL || "http
   .split(",")
   .map((s) => s.trim())
   .filter(Boolean);
-console.log('[CORS] allowed origins:', corsOrigins);
+console.log('[CORS] allowed origins:', corsOrigins) ;
 
 app.use(cors({
     origin: corsOrigins,
