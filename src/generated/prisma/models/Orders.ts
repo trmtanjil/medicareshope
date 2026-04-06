@@ -225,6 +225,7 @@ export type OrdersWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Orders"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Orders"> | Date | string
   orderItems?: Prisma.OrderItemsListRelationFilter
+  customer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type OrdersOrderByWithRelationInput = {
@@ -235,6 +236,7 @@ export type OrdersOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   orderItems?: Prisma.OrderItemsOrderByRelationAggregateInput
+  customer?: Prisma.UserOrderByWithRelationInput
 }
 
 export type OrdersWhereUniqueInput = Prisma.AtLeast<{
@@ -248,6 +250,7 @@ export type OrdersWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Orders"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Orders"> | Date | string
   orderItems?: Prisma.OrderItemsListRelationFilter
+  customer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type OrdersOrderByWithAggregationInput = {
@@ -280,10 +283,10 @@ export type OrdersCreateInput = {
   id?: string
   totalAmount: number
   status?: $Enums.OrderStatus
-  customerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   orderItems?: Prisma.OrderItemsCreateNestedManyWithoutOrderInput
+  customer: Prisma.UserCreateNestedOneWithoutOrdersInput
 }
 
 export type OrdersUncheckedCreateInput = {
@@ -300,10 +303,10 @@ export type OrdersUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  customerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orderItems?: Prisma.OrderItemsUpdateManyWithoutOrderNestedInput
+  customer?: Prisma.UserUpdateOneRequiredWithoutOrdersNestedInput
 }
 
 export type OrdersUncheckedUpdateInput = {
@@ -329,7 +332,6 @@ export type OrdersUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  customerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -383,6 +385,16 @@ export type OrdersScalarRelationFilter = {
   isNot?: Prisma.OrdersWhereInput
 }
 
+export type OrdersListRelationFilter = {
+  every?: Prisma.OrdersWhereInput
+  some?: Prisma.OrdersWhereInput
+  none?: Prisma.OrdersWhereInput
+}
+
+export type OrdersOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type EnumOrderStatusFieldUpdateOperationsInput = {
   set?: $Enums.OrderStatus
 }
@@ -401,13 +413,55 @@ export type OrdersUpdateOneRequiredWithoutOrderItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrdersUpdateToOneWithWhereWithoutOrderItemsInput, Prisma.OrdersUpdateWithoutOrderItemsInput>, Prisma.OrdersUncheckedUpdateWithoutOrderItemsInput>
 }
 
+export type OrdersCreateNestedManyWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.OrdersCreateWithoutCustomerInput, Prisma.OrdersUncheckedCreateWithoutCustomerInput> | Prisma.OrdersCreateWithoutCustomerInput[] | Prisma.OrdersUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.OrdersCreateOrConnectWithoutCustomerInput | Prisma.OrdersCreateOrConnectWithoutCustomerInput[]
+  createMany?: Prisma.OrdersCreateManyCustomerInputEnvelope
+  connect?: Prisma.OrdersWhereUniqueInput | Prisma.OrdersWhereUniqueInput[]
+}
+
+export type OrdersUncheckedCreateNestedManyWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.OrdersCreateWithoutCustomerInput, Prisma.OrdersUncheckedCreateWithoutCustomerInput> | Prisma.OrdersCreateWithoutCustomerInput[] | Prisma.OrdersUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.OrdersCreateOrConnectWithoutCustomerInput | Prisma.OrdersCreateOrConnectWithoutCustomerInput[]
+  createMany?: Prisma.OrdersCreateManyCustomerInputEnvelope
+  connect?: Prisma.OrdersWhereUniqueInput | Prisma.OrdersWhereUniqueInput[]
+}
+
+export type OrdersUpdateManyWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.OrdersCreateWithoutCustomerInput, Prisma.OrdersUncheckedCreateWithoutCustomerInput> | Prisma.OrdersCreateWithoutCustomerInput[] | Prisma.OrdersUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.OrdersCreateOrConnectWithoutCustomerInput | Prisma.OrdersCreateOrConnectWithoutCustomerInput[]
+  upsert?: Prisma.OrdersUpsertWithWhereUniqueWithoutCustomerInput | Prisma.OrdersUpsertWithWhereUniqueWithoutCustomerInput[]
+  createMany?: Prisma.OrdersCreateManyCustomerInputEnvelope
+  set?: Prisma.OrdersWhereUniqueInput | Prisma.OrdersWhereUniqueInput[]
+  disconnect?: Prisma.OrdersWhereUniqueInput | Prisma.OrdersWhereUniqueInput[]
+  delete?: Prisma.OrdersWhereUniqueInput | Prisma.OrdersWhereUniqueInput[]
+  connect?: Prisma.OrdersWhereUniqueInput | Prisma.OrdersWhereUniqueInput[]
+  update?: Prisma.OrdersUpdateWithWhereUniqueWithoutCustomerInput | Prisma.OrdersUpdateWithWhereUniqueWithoutCustomerInput[]
+  updateMany?: Prisma.OrdersUpdateManyWithWhereWithoutCustomerInput | Prisma.OrdersUpdateManyWithWhereWithoutCustomerInput[]
+  deleteMany?: Prisma.OrdersScalarWhereInput | Prisma.OrdersScalarWhereInput[]
+}
+
+export type OrdersUncheckedUpdateManyWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.OrdersCreateWithoutCustomerInput, Prisma.OrdersUncheckedCreateWithoutCustomerInput> | Prisma.OrdersCreateWithoutCustomerInput[] | Prisma.OrdersUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.OrdersCreateOrConnectWithoutCustomerInput | Prisma.OrdersCreateOrConnectWithoutCustomerInput[]
+  upsert?: Prisma.OrdersUpsertWithWhereUniqueWithoutCustomerInput | Prisma.OrdersUpsertWithWhereUniqueWithoutCustomerInput[]
+  createMany?: Prisma.OrdersCreateManyCustomerInputEnvelope
+  set?: Prisma.OrdersWhereUniqueInput | Prisma.OrdersWhereUniqueInput[]
+  disconnect?: Prisma.OrdersWhereUniqueInput | Prisma.OrdersWhereUniqueInput[]
+  delete?: Prisma.OrdersWhereUniqueInput | Prisma.OrdersWhereUniqueInput[]
+  connect?: Prisma.OrdersWhereUniqueInput | Prisma.OrdersWhereUniqueInput[]
+  update?: Prisma.OrdersUpdateWithWhereUniqueWithoutCustomerInput | Prisma.OrdersUpdateWithWhereUniqueWithoutCustomerInput[]
+  updateMany?: Prisma.OrdersUpdateManyWithWhereWithoutCustomerInput | Prisma.OrdersUpdateManyWithWhereWithoutCustomerInput[]
+  deleteMany?: Prisma.OrdersScalarWhereInput | Prisma.OrdersScalarWhereInput[]
+}
+
 export type OrdersCreateWithoutOrderItemsInput = {
   id?: string
   totalAmount: number
   status?: $Enums.OrderStatus
-  customerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  customer: Prisma.UserCreateNestedOneWithoutOrdersInput
 }
 
 export type OrdersUncheckedCreateWithoutOrderItemsInput = {
@@ -439,9 +493,9 @@ export type OrdersUpdateWithoutOrderItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  customerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customer?: Prisma.UserUpdateOneRequiredWithoutOrdersNestedInput
 }
 
 export type OrdersUncheckedUpdateWithoutOrderItemsInput = {
@@ -449,6 +503,96 @@ export type OrdersUncheckedUpdateWithoutOrderItemsInput = {
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OrdersCreateWithoutCustomerInput = {
+  id?: string
+  totalAmount: number
+  status?: $Enums.OrderStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  orderItems?: Prisma.OrderItemsCreateNestedManyWithoutOrderInput
+}
+
+export type OrdersUncheckedCreateWithoutCustomerInput = {
+  id?: string
+  totalAmount: number
+  status?: $Enums.OrderStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  orderItems?: Prisma.OrderItemsUncheckedCreateNestedManyWithoutOrderInput
+}
+
+export type OrdersCreateOrConnectWithoutCustomerInput = {
+  where: Prisma.OrdersWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrdersCreateWithoutCustomerInput, Prisma.OrdersUncheckedCreateWithoutCustomerInput>
+}
+
+export type OrdersCreateManyCustomerInputEnvelope = {
+  data: Prisma.OrdersCreateManyCustomerInput | Prisma.OrdersCreateManyCustomerInput[]
+  skipDuplicates?: boolean
+}
+
+export type OrdersUpsertWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.OrdersWhereUniqueInput
+  update: Prisma.XOR<Prisma.OrdersUpdateWithoutCustomerInput, Prisma.OrdersUncheckedUpdateWithoutCustomerInput>
+  create: Prisma.XOR<Prisma.OrdersCreateWithoutCustomerInput, Prisma.OrdersUncheckedCreateWithoutCustomerInput>
+}
+
+export type OrdersUpdateWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.OrdersWhereUniqueInput
+  data: Prisma.XOR<Prisma.OrdersUpdateWithoutCustomerInput, Prisma.OrdersUncheckedUpdateWithoutCustomerInput>
+}
+
+export type OrdersUpdateManyWithWhereWithoutCustomerInput = {
+  where: Prisma.OrdersScalarWhereInput
+  data: Prisma.XOR<Prisma.OrdersUpdateManyMutationInput, Prisma.OrdersUncheckedUpdateManyWithoutCustomerInput>
+}
+
+export type OrdersScalarWhereInput = {
+  AND?: Prisma.OrdersScalarWhereInput | Prisma.OrdersScalarWhereInput[]
+  OR?: Prisma.OrdersScalarWhereInput[]
+  NOT?: Prisma.OrdersScalarWhereInput | Prisma.OrdersScalarWhereInput[]
+  id?: Prisma.StringFilter<"Orders"> | string
+  totalAmount?: Prisma.FloatFilter<"Orders"> | number
+  status?: Prisma.EnumOrderStatusFilter<"Orders"> | $Enums.OrderStatus
+  customerId?: Prisma.StringFilter<"Orders"> | string
+  createdAt?: Prisma.DateTimeFilter<"Orders"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Orders"> | Date | string
+}
+
+export type OrdersCreateManyCustomerInput = {
+  id?: string
+  totalAmount: number
+  status?: $Enums.OrderStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type OrdersUpdateWithoutCustomerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderItems?: Prisma.OrderItemsUpdateManyWithoutOrderNestedInput
+}
+
+export type OrdersUncheckedUpdateWithoutCustomerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderItems?: Prisma.OrderItemsUncheckedUpdateManyWithoutOrderNestedInput
+}
+
+export type OrdersUncheckedUpdateManyWithoutCustomerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -492,6 +636,7 @@ export type OrdersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   orderItems?: boolean | Prisma.Orders$orderItemsArgs<ExtArgs>
+  customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.OrdersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orders"]>
 
@@ -502,6 +647,7 @@ export type OrdersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   customerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orders"]>
 
 export type OrdersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -511,6 +657,7 @@ export type OrdersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   customerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orders"]>
 
 export type OrdersSelectScalar = {
@@ -525,15 +672,21 @@ export type OrdersSelectScalar = {
 export type OrdersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "totalAmount" | "status" | "customerId" | "createdAt" | "updatedAt", ExtArgs["result"]["orders"]>
 export type OrdersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderItems?: boolean | Prisma.Orders$orderItemsArgs<ExtArgs>
+  customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.OrdersCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type OrdersIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type OrdersIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type OrdersIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type OrdersIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
 
 export type $OrdersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Orders"
   objects: {
     orderItems: Prisma.$OrderItemsPayload<ExtArgs>[]
+    customer: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -937,6 +1090,7 @@ readonly fields: OrdersFieldRefs;
 export interface Prisma__OrdersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   orderItems<T extends Prisma.Orders$orderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Orders$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderItemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  customer<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1221,6 +1375,10 @@ export type OrdersCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    */
   data: Prisma.OrdersCreateManyInput | Prisma.OrdersCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrdersIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1291,6 +1449,10 @@ export type OrdersUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many Orders to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrdersIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

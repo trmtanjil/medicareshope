@@ -39,14 +39,18 @@ model Medicines {
 
   image      String?  //  image url
 
-  //foraign key
+  //foraign key hisabe add hobe database table a
+  //relation ship of medicines many to one
   categoryId String   @map("categoryId")
   category   Category @relation(fields: [categoryId], references: [id])
 
   // Better Auth  theke asche 
+  //foraign key hisabe add hobe database a
+  //relation ship of medicines many to one
   sellerId String @map("seller_id")
+  seller   User   @relation(fields: [sellerId], references: [id])
 
-  //relation ship 
+  //relation ship  of medicines one to many
   OrderItems OrderItems[]
   Reviews    Reviews[]
 
@@ -63,9 +67,14 @@ model Orders {
   totalAmount Float       @map("total_amount")
   status      OrderStatus @default(PENDING)
 
-  customerId String @map("customer_id") //better auth 
-
+   
+   //relation ship of orders one to many
   orderItems OrderItems[]
+
+  //foraign key hisabe add hobe database a 
+  //relation ship of users many to one
+  customerId String @map("customer_id") //better auth 
+   customer   User   @relation(fields: [customerId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -78,11 +87,23 @@ model Orders {
 model OrderItems {
   id String @id @default(uuid())
 
+//foraign key hisabe add hobe database table a
+//relation ship of orders many to one
   orderId String @map("order_id")
   order   Orders @relation(fields: [orderId], references: [id])
 
+  //foraign key hisabe add hobe database table a
+  //relation ship of medicines many to one
   medicineId String    @map("medicine_id")
   medicine   Medicines @relation(fields: [medicineId], references: [id])
+
+
+//foraign key hisabe add hobe database table a
+//relation ship of users many to one
+//jodi customer id order table a rakhte cahi
+ // customerId String @map("customer_id")
+  // customer   User   @relation(fields: [customerId], references: [id])
+
 
   quantity  Int
   unitPrice Float @map("unit_price")
@@ -98,8 +119,12 @@ model Reviews {
   rating  Int     @default(0)
   comment String?
 
+  //foraign key hisabe add hobe database table a
   userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
 
+  //foraign key hisabe add hobe database table a
+  //relation ship of medicines many to one
   medicineId String    @map("medicine_id")
   medicine   Medicines @relation(fields: [medicineId], references: [id])
 
@@ -128,9 +153,18 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
+  // নতুন রিলেশনগুলো এখানে:
+  //relationship of one to many
+  medicines    Medicines[]
+  orders       Orders[]
+  reviews      Reviews[]
+
   role   UserRole @default(CUSTOMER)
   phone  String?
   status String? @default("ACTIVE")
+
+
+
 
   @@unique([email])
   @@map("user")
