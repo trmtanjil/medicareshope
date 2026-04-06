@@ -159,6 +159,9 @@ model User {
   orders       Orders[]
   reviews      Reviews[]
 
+  // Seller Request Relation
+  sellerRequest SellerRequest?
+
   role   UserRole @default(CUSTOMER)
   phone  String?
   status String? @default("ACTIVE")
@@ -168,6 +171,25 @@ model User {
 
   @@unique([email])
   @@map("user")
+}
+
+//7
+// 7. SellerRequest Model (The Professional Feature)
+model SellerRequest {
+  id           String        @id @default(uuid())
+  shopName     String
+  shopAddress  String
+  contactNumber String
+  reason       String?       @db.Text
+  status       RequestStatus @default(PENDING)
+
+  userId String @unique @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("seller_requests")
 }
 
 model Session {
@@ -223,4 +245,10 @@ enum UserRole {
   ADMIN
   SELLER
   CUSTOMER
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
