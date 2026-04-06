@@ -390,6 +390,7 @@ export const ModelName = {
   OrderItems: 'OrderItems',
   Reviews: 'Reviews',
   User: 'User',
+  SellerRequest: 'SellerRequest',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "category" | "medicines" | "orders" | "orderItems" | "reviews" | "user" | "session" | "account" | "verification"
+    modelProps: "category" | "medicines" | "orders" | "orderItems" | "reviews" | "user" | "sellerRequest" | "session" | "account" | "verification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -856,6 +857,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SellerRequest: {
+      payload: Prisma.$SellerRequestPayload<ExtArgs>
+      fields: Prisma.SellerRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SellerRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SellerRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.SellerRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SellerRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload>
+        }
+        findMany: {
+          args: Prisma.SellerRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload>[]
+        }
+        create: {
+          args: Prisma.SellerRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload>
+        }
+        createMany: {
+          args: Prisma.SellerRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SellerRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.SellerRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload>
+        }
+        update: {
+          args: Prisma.SellerRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.SellerRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SellerRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SellerRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.SellerRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SellerRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.SellerRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSellerRequest>
+        }
+        groupBy: {
+          args: Prisma.SellerRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SellerRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SellerRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SellerRequestCountAggregateOutputType> | number
+        }
+      }
+    }
     Session: {
       payload: Prisma.$SessionPayload<ExtArgs>
       fields: Prisma.SessionFieldRefs
@@ -1198,6 +1273,21 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const SellerRequestScalarFieldEnum = {
+  id: 'id',
+  shopName: 'shopName',
+  shopAddress: 'shopAddress',
+  contactNumber: 'contactNumber',
+  reason: 'reason',
+  status: 'status',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SellerRequestScalarFieldEnum = (typeof SellerRequestScalarFieldEnum)[keyof typeof SellerRequestScalarFieldEnum]
+
+
 export const SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -1363,6 +1453,20 @@ export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
     
 
+
+/**
+ * Reference to a field of type 'RequestStatus'
+ */
+export type EnumRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'RequestStatus[]'
+ */
+export type ListEnumRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RequestStatus[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -1464,6 +1568,7 @@ export type GlobalOmitConfig = {
   orderItems?: Prisma.OrderItemsOmit
   reviews?: Prisma.ReviewsOmit
   user?: Prisma.UserOmit
+  sellerRequest?: Prisma.SellerRequestOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit

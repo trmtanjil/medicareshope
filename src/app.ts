@@ -11,6 +11,7 @@ import { authRoutes } from "./modules/auth/auth.route";
 import { orderRouter } from "./modules/order/order.route";
 import { userRouter } from "./modules/user/user.route";
 import { reviewRouter } from "./modules/review/review.route";
+import { SellerRequestRoutes } from "./modules/sellerRequest/sellerRequest.route";
 
 const app = express();
 app.set("trust proxy", 1);
@@ -61,6 +62,8 @@ app.use("/api/seller/orders",orderRouter)
 
 //all user get admi 
 app.use("/api/admin", userRouter);
+//apply seller
+app.use("/api/apply-seller", SellerRequestRoutes);
 
 
 //reviw path 

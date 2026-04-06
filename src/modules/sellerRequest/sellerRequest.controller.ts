@@ -1,0 +1,24 @@
+import { Request, Response } from "express";
+import { SellerRequestService } from "./sellerRequest.service";
+ 
+const createSellerRequest = async (req: Request, res: Response) => {
+  try {
+    const userId = req.user!.id; // আপনার Auth Middleware থেকে আসা ইউজার আইডি
+    const result = await SellerRequestService.createSellerRequestIntoDB(userId, req.body);
+
+    res.status(200).json({
+      success: true,
+      message: "সেলার হওয়ার আবেদনটি সফলভাবে পাঠানো হয়েছে!",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || "আবেদন পাঠাতে সমস্যা হয়েছে",
+    });
+  }
+};
+
+export const SellerRequestController = {
+  createSellerRequest,
+};

@@ -70,6 +70,11 @@ export type Reviews = Prisma.ReviewsModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model SellerRequest
+ * 
+ */
+export type SellerRequest = Prisma.SellerRequestModel
+/**
  * Model Session
  * 
  */
