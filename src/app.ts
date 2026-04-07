@@ -62,8 +62,9 @@ app.use("/api/seller/orders",orderRouter)
 
 //all user get admi 
 app.use("/api/admin", userRouter);
+
 //apply seller
-app.use("/api/apply-seller", SellerRequestRoutes);
+app.use("/api/seller", SellerRequestRoutes);
 
 
 //reviw path 

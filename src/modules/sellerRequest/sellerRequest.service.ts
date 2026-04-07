@@ -1,4 +1,5 @@
  import { prisma } from "../../lib/prisma";
+import { UserRole } from "../../middalewared/auth";
 import { ISellerRequest } from "./sellerRequest.interface";
 
  
@@ -36,4 +37,20 @@ const createSellerRequestIntoDB = async (userId: string, payload: ISellerRequest
   return result;
 };
 
-export const SellerRequestService = { createSellerRequestIntoDB };
+const getAllSellersFromDB = async () => {
+  const result = await prisma.user.findMany({
+    where: {
+      role: UserRole.SELLER ,
+    },
+    include: {
+      sellerRequest: true, // সেলারের দোকানের তথ্যসহ দেখাবে
+    },
+  });
+  return result;
+};
+
+export const SellerRequestService = {
+   createSellerRequestIntoDB,
+  getAllSellersFromDB,
+
+ };

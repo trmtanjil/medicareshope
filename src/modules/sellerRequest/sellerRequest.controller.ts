@@ -19,6 +19,20 @@ const createSellerRequest = async (req: Request, res: Response) => {
   }
 };
 
+const getAllSellers = async (req: Request, res: Response) => {
+  try {
+    const result = await SellerRequestService.getAllSellersFromDB();
+    res.status(200).json({
+      success: true,
+      message: "সেলারদের লিস্ট সফলভাবে পাওয়া গেছে",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 export const SellerRequestController = {
   createSellerRequest,
+getAllSellers  
 };
