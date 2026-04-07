@@ -49,8 +49,19 @@ const getAllSellersFromDB = async () => {
   return result;
 };
 
+const deactivateSellerIntoDB = async (id: string) => {
+  const result = await prisma.user.update({
+    where: { id },
+    data: {
+      status: "BLOCKED", // অথবা 'INACTIVE' আপনার এনাম অনুযায়ী
+    },
+  });
+  return result;
+};
+
 export const SellerRequestService = {
    createSellerRequestIntoDB,
   getAllSellersFromDB,
+  deactivateSellerIntoDB
 
  };

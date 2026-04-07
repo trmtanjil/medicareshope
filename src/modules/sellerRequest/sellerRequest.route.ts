@@ -18,4 +18,10 @@ router.get(
   SellerRequestController.getAllSellers
 );
 
+router.patch(
+  "/deactivate/:id",
+  // authMiddleware("ADMIN"),
+  SellerRequestController.deactivateSeller
+);
+
 export const SellerRequestRoutes = router;

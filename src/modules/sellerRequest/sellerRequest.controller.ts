@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { SellerRequestService } from "./sellerRequest.service";
+import { SellerRequestRoutes } from "./sellerRequest.route";
  
 const createSellerRequest = async (req: Request, res: Response) => {
   try {
@@ -32,7 +33,23 @@ const getAllSellers = async (req: Request, res: Response) => {
   }
 };
 
+const deactivateSeller = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const result = await SellerRequestService.deactivateSellerIntoDB(id as string);
+    res.status(200).json({
+      success: true,
+      message: "সেলারকে সফলভাবে ডিঅ্যাক্টিভেট করা হয়েছে",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 export const SellerRequestController = {
   createSellerRequest,
-getAllSellers  
+getAllSellers  ,
+deactivateSeller
+
 };
