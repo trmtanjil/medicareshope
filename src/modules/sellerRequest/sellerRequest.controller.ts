@@ -46,10 +46,23 @@ const deactivateSeller = async (req: Request, res: Response) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
-
+const getPendingRequests = async (req: Request, res: Response) => {
+  try {
+    const result = await SellerRequestService.getAllPendingRequestsFromDB();
+    res.status(200).json({
+      success: true,
+      message: "পেন্ডিং রিকোয়েস্টগুলো পাওয়া গেছে",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
 export const SellerRequestController = {
   createSellerRequest,
 getAllSellers  ,
-deactivateSeller
+deactivateSeller,
+getPendingRequests,
+
 
 };

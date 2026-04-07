@@ -24,4 +24,10 @@ router.patch(
   SellerRequestController.deactivateSeller
 );
 
+// পেন্ডিং লিস্ট দেখার জন্য
+router.get("/pending-requests", SellerRequestController.getPendingRequests);
+
+// অ্যাপ্রুভ করার জন্য
+router.patch("/approve/:id", SellerRequestController.approveRequest);
+
 export const SellerRequestRoutes = router;
