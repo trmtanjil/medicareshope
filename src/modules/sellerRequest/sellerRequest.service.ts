@@ -72,10 +72,35 @@ const getAllPendingRequestsFromDB = async () => {
   return result;
 };
 
+// ২. রিকোয়েস্ট অ্যাপ্রুভ করে ইউজারকে সেলার বানানো (Transaction)
+const approveSellerRequestIntoDB = async (requestId: string) => {
+  const result = await prisma.$transaction(async (tx) => {
+    // ক. রিকোয়েস্টের স্ট্যাটাস APPROVED করা
+    const updatedRequest = await tx.sellerRequest.update({
+      where: { id: requestId },
+      data: { status: RequestStatus.APPROVED },
+    });
+
+    // খ. ইউজারের রোল SELLER এবং স্ট্যাটাস ACTIVE করা
+    await tx.user.update({
+      where: { id: updatedRequest.userId },
+      data: {
+        role: UserRole.SELLER,
+        status: "ACTIVE",
+      },
+    });
+
+    return updatedRequest;
+  });
+
+  return result;
+};
+
 export const SellerRequestService = {
    createSellerRequestIntoDB,
   getAllSellersFromDB,
   deactivateSellerIntoDB,
-  getAllPendingRequestsFromDB
+  getAllPendingRequestsFromDB,
+  approveSellerRequestIntoDB
 
  };

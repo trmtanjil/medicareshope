@@ -58,11 +58,28 @@ const getPendingRequests = async (req: Request, res: Response) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+const approveRequest = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params; // রিকোয়েস্ট আইডি
+    const result = await SellerRequestService.approveSellerRequestIntoDB(id as string);
+    res.status(200).json({
+      success: true,
+      message: "ইউজারকে সফলভাবে সেলার বানানো হয়েছে!",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+
 export const SellerRequestController = {
   createSellerRequest,
 getAllSellers  ,
 deactivateSeller,
 getPendingRequests,
+approveRequest
 
 
 };
