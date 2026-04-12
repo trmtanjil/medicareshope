@@ -8,7 +8,7 @@ const getAllUsers = async () => {
       name: true,
       email: true,
       role: true,
-      // createdAt: true,
+      createdAt: true,
      },
     orderBy: {
       createdAt: 'desc',
